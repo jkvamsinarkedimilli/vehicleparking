@@ -18,7 +18,7 @@ const RegistrationsSchema = new mongoose.Schema({
   vehicleno: {
     type: String,
     minlength: 10,
-    maxlength: 10,
+    maxlength: 13,
     required: [true, 'Vehicle No is required to proceed'],
     trim: true,
     uppercase: true,

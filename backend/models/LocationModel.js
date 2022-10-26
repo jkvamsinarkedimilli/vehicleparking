@@ -5,7 +5,9 @@ const locationSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  availaat: [String],
+  availaat: [{
+    loc:String
+  }],
 });
 Location = mongoose.model('Location', locationSchema);
 module.exports = Location;

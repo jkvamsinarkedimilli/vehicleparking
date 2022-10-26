@@ -70,11 +70,13 @@ searchButton.addEventListener('click', async function () {
       if (res.data.status === 'Success') {
         availableAreas[0].innerHTML = '';
         document.getElementsByClassName('slots')[0].innerHTML = '';
+        // console.log(res.data.places);
         res.data.places.forEach(loc_1 => {
+          // console.log(loc_1);
           var divs = document.createElement('div');
           var locName = document.createElement('p');
           divs.classList.add('available-locs');
-          locName.innerHTML = loc_1;
+          locName.innerHTML = loc_1.loc;
           locName.style.marginLeft = '8px';
           divs.appendChild(locName);
           var bookButton = document.createElement('button');
@@ -85,7 +87,7 @@ searchButton.addEventListener('click', async function () {
             event.preventDefault();
             bookslotPopup.classList.remove('hidden');
             overlay.classList.remove('hidden');
-            bookslotLoc.value = loc_1;
+            bookslotLoc.value = loc_1.loc;
           });
           divs.appendChild(bookButton);
           divs.style.display = 'flex';
@@ -95,6 +97,7 @@ searchButton.addEventListener('click', async function () {
       }
     })
     .catch(err => {
+      console.log(err);
       if (err.response.data.status === 'Failed') {
         window.alert(err.response.data.places);
       }
@@ -239,6 +242,7 @@ viewBookings.addEventListener('click', async function () {
     .post('http://localhost:3000/viewbookings', { email })
     .then(res => {
       res.data.message.forEach(res1 => {
+        addBookings.innerHTML = "";
         var divs = document.createElement('div');
         var locName = document.createElement('p');
         locName.textContent = res1.location;

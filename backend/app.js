@@ -48,6 +48,7 @@ app.post('/locations', async (req, res) => {
   try {
     const city = req.body.city;
     const resp = await Location.find({ city });
+    console.log(resp[0].availaat);
     if (resp.length === 1) {
       return res.status(200).json({
         status: 'Success',
@@ -79,6 +80,7 @@ app.post('/registrations', async (req, res) => {
       status: 'Success',
     });
   } catch (e) {
+    console.log(e);
     return res.status(400).json({
       status: 'Failed',
       message: e,
